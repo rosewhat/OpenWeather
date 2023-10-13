@@ -1,16 +1,31 @@
 package com.example.openweather.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,8 +43,55 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            MyApp()
             OpenWeatherTheme {
-
+                Greeting(
+                    "Москва", 20, listOf(
+                        GetTypeWeather(
+                            10, "Холодно"
+                        ),
+                        GetTypeWeather(
+                            12, "Холодно"
+                        ),
+                        GetTypeWeather(
+                            15, "Солнечно"
+                        ),
+                        GetTypeWeather(
+                            18, "Солнечно"
+                        ),
+                        GetTypeWeather(
+                            21, "Солнечно"
+                        ),
+                        GetTypeWeather(
+                            24, "Тепло"
+                        ),
+                        GetTypeWeather(
+                            27, "Жарко"
+                        ),
+                    ), listOf(
+                        GetTimeWeather(
+                            5, "9:00"
+                        ),
+                        GetTimeWeather(
+                            10, "12:00"
+                        ),
+                        GetTimeWeather(
+                            15, "15:00"
+                        ),
+                        GetTimeWeather(
+                            20, "18:00"
+                        ),
+                        GetTimeWeather(
+                            25, "21:00"
+                        ),
+                        GetTimeWeather(
+                            30, "22:00"
+                        ),
+                        GetTimeWeather(
+                            35, "23:00"
+                        ),
+                    )
+                )
             }
         }
     }
@@ -52,7 +114,9 @@ class MainActivity : ComponentActivity() {
             Text(
                 text = city,
                 color = Color.Black,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                        .padding(top = 25.dp),
             )
             Text(
                 text = "$currentWeather °C",
@@ -182,6 +246,67 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MyApp() {
+        Scaffold (
+            topBar = {
+                AppBar(title = "OpenWeather")
+            },
+            bottomBar = {
+                BottomBar()
+            }
+        )  { innerPadding ->
+
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun AppBar(title: String) {
+        TopAppBar(
+            title = { Text(text = title) },
+            navigationIcon = {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu",
+                    modifier = Modifier.clickable {}
+                )
+            }, actions = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Menu",
+                    modifier = Modifier.clickable {}
+                )
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "Menu",
+                    modifier = Modifier.clickable {}
+                )
+            }
+        )
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun BottomBar() {
+        BottomAppBar {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Filled.Menu, contentDescription = "Menu")
+            }
+            Spacer(Modifier.weight(1f, true))
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Filled.Share, contentDescription = "Share")
+            }
+        }
+    }
+
+
 
     companion object {
         const val HEAT = "Тепло"
