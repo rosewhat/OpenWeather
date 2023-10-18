@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,8 +15,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -31,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -115,8 +122,8 @@ class MainActivity : ComponentActivity() {
                 text = city,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                        .padding(top = 25.dp),
+                modifier = Modifier
+                    .padding(top = 35.dp),
             )
             Text(
                 text = "$currentWeather °C",
@@ -171,7 +178,7 @@ class MainActivity : ComponentActivity() {
                 .padding(20.dp, 60.dp, 0.dp, 20.dp),
         ) {
             Text(
-                text = "${getTypeWeather.temp }°C",
+                text = "${getTypeWeather.temp}°C",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -251,61 +258,17 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MyApp() {
-        Scaffold (
+        Scaffold(
             topBar = {
                 AppBar(title = "OpenWeather")
             },
             bottomBar = {
                 BottomBar()
-            }
-        )  { innerPadding ->
+            },
+        ) { innerPadding ->
 
         }
     }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun AppBar(title: String) {
-        TopAppBar(
-            title = { Text(text = title) },
-            navigationIcon = {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu",
-                    modifier = Modifier.clickable {}
-                )
-            }, actions = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = "Menu",
-                    modifier = Modifier.clickable {}
-                )
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "Menu",
-                    modifier = Modifier.clickable {}
-                )
-            }
-        )
-    }
-
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun BottomBar() {
-        BottomAppBar {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Menu, contentDescription = "Menu")
-            }
-            Spacer(Modifier.weight(1f, true))
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Favorite, contentDescription = "Favorite")
-            }
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Share, contentDescription = "Share")
-            }
-        }
-    }
-
 
 
     companion object {
