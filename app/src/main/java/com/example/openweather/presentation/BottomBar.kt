@@ -16,10 +16,12 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun BottomBar() {
+fun BottomBar(navController: NavHostController) {
     BottomAppBar {
         Row(
             modifier = Modifier
@@ -27,16 +29,16 @@ fun BottomBar() {
                 .padding(16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(Icons.Filled.Home, contentDescription = "Account")
+            IconButton(onClick = { navController.navigate("main") }) {
+                Icon(Icons.Filled.Home, contentDescription = "Home")
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate("dateRange") }) {
                 Icon(Icons.Filled.DateRange, contentDescription = "DateRange")
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate("share") }) {
                 Icon(Icons.Filled.Share, contentDescription = "Share")
             }
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate("settings") }) {
                 Icon(Icons.Filled.Settings, contentDescription = "Settings")
             }
         }
